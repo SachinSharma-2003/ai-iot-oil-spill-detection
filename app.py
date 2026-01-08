@@ -39,10 +39,6 @@ st.caption(
 
 st.divider()
 
-
-model.summary()
-
-
 # ---------------- LOAD MODEL SAFELY ----------------
 def load_model_once():
     model = build_unet(input_shape=(256, 256, 1))
@@ -172,4 +168,5 @@ if uploaded_file is not None:
 # ----------------- FOOTER ----------------
 st.markdown("---")
 st.caption("© 2026 | AI–IoT Marine Oil Spill Detection | Sachin Sharma A")
+
 
