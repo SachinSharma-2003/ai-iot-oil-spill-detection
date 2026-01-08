@@ -10,7 +10,7 @@ from model import build_unet
 st.set_page_config(
     page_title="AI–IoT Oil Spill Detection",
     layout="wide",
-    page_icon="🛢️"
+    page_icon="🛢️"   
 )
 
 # ---------------- CUSTOM CSS ----------------
@@ -39,17 +39,22 @@ st.caption(
 
 st.divider()
 
+
+model.summary()
+
+
 # ---------------- LOAD MODEL SAFELY ----------------
 def load_model_once():
     model = build_unet(input_shape=(256, 256, 1))
-    model(tf.zeros((1, 256, 256, 1)))
-    model.load_weights(
-    "unet_oil_spill.weights.h5",
-    by_name=True,
-    skip_mismatch=True
-    )
+
+    # Build model explicitly
+    model.build((None, 256, 256, 1))
+
+    # Load weights safely
+    model.load_weights("unet_oil_spill.weights.h5")
 
     return model
+
 
 if "model" not in st.session_state:
     with st.spinner("🔄 Loading segmentation model..."):
