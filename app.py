@@ -40,17 +40,10 @@ st.caption(
 st.divider()
 
 # ---------------- LOAD MODEL SAFELY ----------------
+from tensorflow.keras.models import load_model
+
 def load_model_once():
-    model = build_unet(input_shape=(256, 256, 1))
-
-    # Build model explicitly
-    model.build((None, 256, 256, 1))
-
-    # Load weights safely
-    model.load_weights("unet_oil_spill.weights.h5")
-
-    return model
-
+    return load_model("unet_oil_spill_model.keras", compile=False)
 
 if "model" not in st.session_state:
     with st.spinner("🔄 Loading segmentation model..."):
@@ -168,5 +161,4 @@ if uploaded_file is not None:
 # ----------------- FOOTER ----------------
 st.markdown("---")
 st.caption("© 2026 | AI–IoT Marine Oil Spill Detection | Sachin Sharma A")
-
 
