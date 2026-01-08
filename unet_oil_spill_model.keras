@@ -1,1 +1,7 @@
+from model import build_unet
+import tensorflow as tf
 
+model = build_unet((256, 256, 1))
+model.load_weights("unet_oil_spill.weights.h5")
+
+model.save("unet_oil_spill_model.keras")
